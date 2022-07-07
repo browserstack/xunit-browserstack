@@ -19,5 +19,9 @@
     {
       "browser": "safari"
     }
-  ]
+  ],
+
+  "localOptions": {
+    "forceLocal": true
+  }
 }
