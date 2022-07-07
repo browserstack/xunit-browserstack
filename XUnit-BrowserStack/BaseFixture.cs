@@ -17,7 +17,7 @@ namespace XUnit_BrowserStack
         {
             // Get Configuration for correct profile
             string currentDirectory = Directory.GetCurrentDirectory();
-            string path = Path.Combine(currentDirectory, "conf", $"{profile}.conf.json");
+            string path = Path.Combine(currentDirectory, "config.json");
             JObject config = JObject.Parse(File.ReadAllText(path));
             if (config is null)
                 throw new Exception("Configuration not found!");
@@ -51,10 +51,9 @@ namespace XUnit_BrowserStack
             }
 
             // Start Local if browserstack.local is set to true
-            if (desiredCapabilities.ToCapabilities().HasCapability("browserstack.local") && 
-                desiredCapabilities.ToCapabilities().GetCapability("browserstack.local").ToString().Equals("true", StringComparison.OrdinalIgnoreCase) &&
-                accessKey is not null)
+            if (profile.Equals("local") && accessKey is not null)
             {
+                desiredCapabilities.AddAdditionalCapability("browserstack.local", true, true);
                 browserStackLocal = new Local();
                 List<KeyValuePair<string, string>> bsLocalArgs = new List<KeyValuePair<string, string>>() {
                     new KeyValuePair<string, string>("key", accessKey)
