@@ -19,13 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-	<Content Include="conf\single.conf.json">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</Content>
-	<Content Include="conf\parallel.conf.json">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</Content>
-	<Content Include="conf\local.conf.json">
+	<Content Include="config.json">
 		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</Content>
   </ItemGroup>
