@@ -49,7 +49,8 @@ namespace XUnit_BrowserStack
             {
                 desiredCapabilities.AddAdditionalCapability(x.Key, x.Value, true);
             }
-
+            desiredCapabilities.AddAdditionalCapability("name", $"{profile}_test", true);
+            
             // Start Local if browserstack.local is set to true
             if (profile.Equals("local") && accessKey is not null)
             {
