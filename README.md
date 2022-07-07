@@ -6,7 +6,7 @@
 ## Setup
 * Clone the repo
 * Install dependencies `dotnet build`
-* Update *.conf.json files inside the `XUnit-BrowserStack/conf` directory with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings). 
+* Update `config.json` files inside the `XUnit-BrowserStack` directory with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings). 
 
 ## Running your tests
 * To run a single test, run `dotnet test --filter "profile=single"`
