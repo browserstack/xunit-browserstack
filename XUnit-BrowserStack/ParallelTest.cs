@@ -18,7 +18,7 @@ namespace XUnit_BrowserStack
         {
             try
             {
-                RemoteWebDriver driver = baseFixture.GetDriver("chrome", "single");
+                RemoteWebDriver driver = baseFixture.GetDriver(platform, "parallel");
                 WebDriverWait webDriverWait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(2000));
                 driver.Manage().Window.Maximize();
                 driver.Navigate().GoToUrl("https://bstackdemo.com/");
