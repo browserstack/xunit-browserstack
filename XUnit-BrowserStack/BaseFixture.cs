@@ -1,6 +1,6 @@
 using OpenQA.Selenium.Remote;
 using Newtonsoft.Json.Linq;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium;
 using BrowserStack;
 
@@ -23,13 +23,15 @@ namespace XUnit_BrowserStack
                 throw new Exception("Configuration not found!");
 
             // Get Platform specific capabilities
-            JObject capabilities = config.GetValue("environments").Where(x => x is JObject y && x["browser"].ToString().Equals(platform)).ToList()[0] as JObject;
+            JObject capabilities = config.GetValue("environments").Where(x => x is JObject y && x["browserName"].ToString().Equals(platform)).ToList()[0] as JObject;
 
             // Get Common Capabilities
             JObject commonCapabilities = config.GetValue("capabilities") as JObject;
 
             // Merge Capabilities
             capabilities.Merge(commonCapabilities);
+
+            JObject bstackOptions = capabilities["bstack:options"] as JObject;
 
             // Get username and accesskey
             string? username = Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME");
@@ -40,21 +42,16 @@ namespace XUnit_BrowserStack
             if (accessKey is null)
                 accessKey = config.GetValue("key").ToString();
 
-            capabilities.Add("browserstack.user", username);
-            capabilities.Add("browserstack.key", accessKey);
-
-            // Create Desired Cappabilities for WebDriver
-            ChromeOptions desiredCapabilities = new ChromeOptions();
-            foreach (var x in capabilities)
-            {
-                desiredCapabilities.AddAdditionalCapability(x.Key, x.Value, true);
-            }
-            desiredCapabilities.AddAdditionalCapability("name", $"{profile}_test", true);
+            bstackOptions["userName"] = username;
+            bstackOptions["accessKey"] = accessKey;
+            
+            // Add session name
+            bstackOptions["sessionName"] = $"{profile}_test";
             
             // Start Local if browserstack.local is set to true
             if (profile.Equals("local") && accessKey is not null)
             {
-                desiredCapabilities.AddAdditionalCapability("browserstack.local", true, true);
+                bstackOptions["local"] = true;
                 browserStackLocal = new Local();
                 List<KeyValuePair<string, string>> bsLocalArgs = new List<KeyValuePair<string, string>>() {
                     new KeyValuePair<string, string>("key", accessKey)
@@ -67,6 +64,19 @@ namespace XUnit_BrowserStack
                     }
                 }
                 browserStackLocal.start(bsLocalArgs);
+            }
+
+            capabilities["bstack:options"] = bstackOptions;
+
+            // Create Desired Cappabilities for WebDriver
+            DriverOptions desiredCapabilities = getBrowserOption(capabilities.GetValue("browserName").ToString());
+            capabilities.Remove("browserName");
+            foreach (var x in capabilities)
+            {
+                if (x.Key.Equals("bstack:options"))
+                    desiredCapabilities.AddAdditionalOption(x.Key, x.Value.ToObject<Dictionary<string, object>>());
+                else
+                    desiredCapabilities.AddAdditionalOption(x.Key, x.Value);
             }
 
             // Create RemoteWebDriver instance
@@ -83,6 +93,23 @@ namespace XUnit_BrowserStack
                     ((IJavaScriptExecutor)WebDriver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \"Test Passed!\"}}");
                 else
                     ((IJavaScriptExecutor)WebDriver).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \"Test Failed!\"}}");
+            }
+        }
+
+        static DriverOptions getBrowserOption(String browser)
+        {
+            switch (browser)
+            {
+                case "chrome":
+                    return new OpenQA.Selenium.Chrome.ChromeOptions();
+                case "firefox":
+                    return new OpenQA.Selenium.Firefox.FirefoxOptions();
+                case "safari":
+                    return new OpenQA.Selenium.Safari.SafariOptions();
+                case "edge":
+                    return new OpenQA.Selenium.Edge.EdgeOptions();
+                default:
+                    return new OpenQA.Selenium.Chrome.ChromeOptions();
             }
         }
 
