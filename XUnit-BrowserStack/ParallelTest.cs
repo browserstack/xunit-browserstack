@@ -18,7 +18,7 @@ namespace XUnit_BrowserStack
         {
             try
             {
-                RemoteWebDriver driver = baseFixture.GetDriver("chrome", "single");
+                RemoteWebDriver driver = baseFixture.GetDriver(platform, "parallel");
                 WebDriverWait webDriverWait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(2000));
                 driver.Manage().Window.Maximize();
                 driver.Navigate().GoToUrl("https://bstackdemo.com/");
@@ -27,7 +27,7 @@ namespace XUnit_BrowserStack
                 string productOnPageText = webDriverWait.Until(driver => driver.FindElement(By.XPath("//*[@id=\"1\"]/p"))).Text;
 
                 webDriverWait.Until(driver => driver.FindElement(By.XPath("//*[@id=\"1\"]/div[4]"))).Click();
-                bool cartOpened = webDriverWait.Until(driver => driver.FindElement(By.XPath("//*[@class=\"float-cart__content\"]"))).Displayed;
+                bool cartOpened = webDriverWait.Until(driver => driver.FindElement(By.XPath("//*[@class=\"float-cart__content\"]"))).Enabled;
                 Assert.True(cartOpened);
                 string productOnCartText = webDriverWait.Until(driver => driver.FindElement(By.XPath("//*[@id=\"__next\"]/div/div/div[2]/div[2]/div[2]/div/div[3]/p[1]"))).Text;
                 Assert.Equal(productOnCartText, productOnPageText);

@@ -4,20 +4,22 @@
   "key": "BROWSERSTACK_ACCESS_KEY",
 
   "capabilities": {
-    "build": "xunit-browserstack",
-    "name": "test",
-    "browserstack.debug": true
+    "bstack:options": {
+      "buildName": "xunit-browserstack",
+      "sessionName": "test",
+      "debug": "true"
+    }
   },
 
   "environments": [
     {
-      "browser": "chrome"
+      "browserName": "chrome"
     },
     {
-      "browser": "firefox"
+      "browserName": "firefox"
     },
     {
-      "browser": "safari"
+      "browserName": "safari"
     }
   ],
 
