@@ -9,3 +9,4 @@ browserstack.err
 log
 local.log
 BrowserStackLocal.exe
+.config

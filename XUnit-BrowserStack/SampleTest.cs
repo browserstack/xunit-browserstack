@@ -16,7 +16,7 @@ namespace XUnit_BrowserStack
         }
 
         [Fact]
-        [Trait("profile", "sample_test")]
+        [Trait("Category", "sample-test")]
         public void Test()
         {
             RemoteWebDriver driver = baseFixture.GetDriver("chrome", "single");
