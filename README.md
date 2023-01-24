@@ -3,17 +3,30 @@
 
 <img src="https://github.com/browserstack/cucumber-java-browserstack/blob/master/src/test/resources/img/browserstack.png?raw=true" width="60" height="60" alt="BrowserStack" > <img src="https://xunit.net/images/full-logo.svg" width="150" height="60" alt="XUnit">
 
-## Setup
+## Run Sample Build
 * Clone the repo
-* Install dependencies `dotnet build`
-* Update `config.json` files inside the `XUnit-BrowserStack` directory with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings). 
-
-## Running your tests
-* To run a single test, run `dotnet test --filter "profile=single"`
-* To run local tests, run `dotnet test --filter "profile=local"`
-* To run parallel tests, run `dotnet test --filter "profile=parallel"`
+* Open the solution `NUnit-BrowserStack.sln` in Visual Studio
+* Build the solution
+* Update `browserstack.yml` file with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings)
+### Running your tests from CLI
+* To run the test suite having cross-platform with parallelization, dotnet test --filter "Category=sample-test"
+* To run local tests, dotnet test --filter "Category=sample-local-test"
+### Running your tests from Test Explorer
+- To run a parallel tests, run test with fixture `sample-test`
+- To run local tests, run test with fixture `sample-local-test`
 
  Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
+
+ ## Integrate your test suite
+
+This repository uses the BrowserStack SDK to run tests on BrowserStack. Follow the steps below to install the SDK in your test suite and run tests on BrowserStack:
+
+* Create sample browserstack.yml file with the browserstack related capabilities with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings) and place it in your root folder.
+* Add nuget library BrowserStack.TestAdapter
+```sh
+dotnet add BrowserStack.TestAdapter
+```
+* Build project `dotnet build`
 
 ## Notes
 * You can view your test results on the [BrowserStack Automate dashboard](https://www.browserstack.com/automate)
