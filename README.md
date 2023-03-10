@@ -5,7 +5,7 @@
 
 ## Run Sample Build
 * Clone the repo
-* Open the solution `NUnit-BrowserStack.sln` in Visual Studio
+* Open the solution `XUnit-BrowserStack.sln` in Visual Studio
 * Build the solution
 * Update `browserstack.yml` file with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings)
 ### Running your tests from CLI
@@ -39,10 +39,16 @@ dotnet add BrowserStack.TestAdapter
   export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
   ```
 
-  * For Windows:
+  * For Windows Cmd:
   ```
   set BROWSERSTACK_USERNAME=<browserstack-username>
   set BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
+  ```
+
+  * For Windows Powershell:
+  ```
+  $env:BROWSERSTACK_USERNAME=<browserstack-username>
+  $env:BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
   ```
 
 ## Addtional Resources
