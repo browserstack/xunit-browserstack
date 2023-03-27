@@ -9,9 +9,8 @@
 * Update `config.json` files inside the `XUnit-BrowserStack` directory with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings). 
 
 ## Running your tests
-* To run a single test, run `dotnet test --filter "profile=single"`
+* To run tests, run `dotnet test --filter "profile=parallel"`
 * To run local tests, run `dotnet test --filter "profile=local"`
-* To run parallel tests, run `dotnet test --filter "profile=parallel"`
 
  Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
 
