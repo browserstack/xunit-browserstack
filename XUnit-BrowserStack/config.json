@@ -6,7 +6,8 @@
   "capabilities": {
     "build": "xunit-browserstack",
     "name": "test",
-    "browserstack.debug": true
+    "browserstack.debug": true,
+    "browserstack.source": "xunit:sample-selenium-3:v1.0"
   },
 
   "environments": [
