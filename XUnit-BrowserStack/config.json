@@ -5,8 +5,8 @@
 
   "capabilities": {
     "bstack:options": {
-      "buildName": "xunit-browserstack",
-      "sessionName": "test",
+      "buildName": "browserstack build",
+      "sessionName": "BStack sample test",
       "debug": "true",
       "source": "xunit:sample-main:v1.0"
     }
