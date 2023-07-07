@@ -45,9 +45,6 @@ namespace XUnit_BrowserStack
             bstackOptions["userName"] = username;
             bstackOptions["accessKey"] = accessKey;
             
-            // Add session name
-            bstackOptions["sessionName"] = $"{profile}_test";
-            
             // Start Local if browserstack.local is set to true
             if (profile.Equals("local") && accessKey is not null)
             {
