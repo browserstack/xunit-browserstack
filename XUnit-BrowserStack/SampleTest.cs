@@ -17,7 +17,7 @@ namespace XUnit_BrowserStack
 
         [Fact]
         [Trait("Category", "sample-test")]
-        public void Test()
+        public void BStackSampleTest()
         {
             RemoteWebDriver driver = baseFixture.GetDriver("chrome", "single");
             WebDriverWait webDriverWait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(2000));

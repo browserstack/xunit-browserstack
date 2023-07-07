@@ -16,7 +16,7 @@ namespace XUnit_BrowserStack
 
         [Fact]
         [Trait("Category", "sample-local-test")]
-        public void Test()
+        public void BStackLocalTest()
         {
             RemoteWebDriver driver = baseFixture.GetDriver("chrome", "local");
             driver.Navigate().GoToUrl("http://bs-local.com:45454/");
