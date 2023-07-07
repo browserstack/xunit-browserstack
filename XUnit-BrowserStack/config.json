@@ -4,8 +4,8 @@
   "key": "BROWSERSTACK_ACCESS_KEY",
 
   "capabilities": {
-    "build": "xunit-browserstack",
-    "name": "test",
+    "build": "browserstack build",
+    "name": "BStack sample test",
     "browserstack.debug": true,
     "browserstack.source": "xunit:sample-selenium-3:v1.0"
   },
