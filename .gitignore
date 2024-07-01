@@ -7,5 +7,5 @@ obj
 .DS_Store
 browserstack.err
 log
-local.log
 BrowserStackLocal.exe
+local.log
