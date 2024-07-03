@@ -5,3 +5,7 @@ bin
 obj
 .vs
 .DS_Store
+browserstack.err
+log
+BrowserStackLocal.exe
+local.log
